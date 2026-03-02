@@ -86,7 +86,7 @@ variable "secret_iam_bindings" {
 
 
 # ==========================================
-# BUCKETS
+# CLOUD STORAGE BUCKETS
 # ==========================================
 variable "buckets" {
   description = "Buckets to create. Key map is used as bucket name, attributes are optional but have proper default values"
@@ -112,7 +112,7 @@ variable "buckets" {
 }
 
 # ==========================================
-# ARTIFACT REGISTRY
+# ARTIFACT REGISTRY REPOSITORIES
 # ==========================================
 variable "artifact_registry_repositories" {
   description = <<EOT
@@ -134,5 +134,34 @@ EOT
     description   = string
     format        = string
     ar_labels     = map(string)
+  }))
+}
+
+# ==========================================
+# CLOUD RUN SERVICES
+# ==========================================
+variable "cloud_run_services" {
+  description = "Mapa de servicios Cloud Run a crear"
+  type = map(object({
+    name            = string
+    region          = string
+    image           = string
+    cpu             = string
+    memory          = string
+    min_instances   = number
+    max_instances   = number
+    timeout         = string
+    is_public       = bool
+    service_account = string
+    env_vars        = map(string)
+    vpc_access = optional(object({
+      network_interfaces = optional(object({
+        network    = string
+        subnetwork = string
+        tags       = optional(list(string), [])
+      }))
+      egress = optional(string, "ALL_TRAFFIC")
+    }))
+    cr_srv_labels = map(string)
   }))
 }

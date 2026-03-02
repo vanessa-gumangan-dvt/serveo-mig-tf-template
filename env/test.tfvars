@@ -145,7 +145,7 @@ secret_iam_bindings = {
 }
 
 # =============================================================================
-# BUCKETS
+# CLOUD STORAGE BUCKETS
 # =============================================================================
 buckets = {
   "<BUCKET_NAME_1>" = {
@@ -187,7 +187,7 @@ buckets = {
 }
 
 # =============================================================================
-# ARTIFACT REGISTRY
+# ARTIFACT REGISTRY REPOSITORIES
 # =============================================================================
 artifact_registry_repositories = {
   "<REPOSITORY_KEY_1>" = {
@@ -209,4 +209,77 @@ artifact_registry_repositories = {
       description = "<DESCRIPTION>"
     }
   }
+}
+
+# =============================================================================
+# CLOUD RUN SERVICES
+# =============================================================================
+cloud_run_services = {
+
+  "<SERVICE_KEY_1>" = {
+    name   = "<CLOUD_RUN_SERVICE_NAME_1>"
+    region = "<REGION>"  # e.g. europe-west1
+    image  = "<REGION>-docker.pkg.dev/<PROJECT_ID>/<REPOSITORY>/<IMAGE>:<TAG>"
+
+    cpu    = "<CPU>"     # e.g. "1", "2"
+    memory = "<MEMORY>"  # e.g. "512Mi", "1Gi"
+
+    min_instances = <MIN_INSTANCES>  # e.g. 0
+    max_instances = <MAX_INSTANCES>  # e.g. 3
+
+    timeout = "<TIMEOUT>"  # e.g. "300s"
+
+    is_public       = <TRUE_OR_FALSE>
+    service_account = "<SERVICE_ACCOUNT_EMAIL>"
+
+    env_vars = {
+      "<ENV_VAR_KEY_1>" = "<ENV_VAR_VALUE_1>"
+      "<ENV_VAR_KEY_2>" = "<ENV_VAR_VALUE_2>"
+    }
+
+    # Opcional - VPC Access
+    vpc_access = {
+      egress = "<EGRESS_MODE>" # ALL_TRAFFIC | PRIVATE_RANGES_ONLY
+
+      network_interfaces = {
+        network    = "<VPC_NETWORK_NAME>"
+        subnetwork = "<SUBNETWORK_NAME>"
+        tags       = ["<TAG_1>", "<TAG_2>"]
+      }
+    }
+
+    cr_srv_labels = {
+      application = "<APPLICATION_NAME>"
+      component   = "<COMPONENT_NAME>"
+    }
+  }
+
+
+  "<SERVICE_KEY_2>" = {
+    name   = "<CLOUD_RUN_SERVICE_NAME_2>"
+    region = "<REGION>"
+    image  = "<REGION>-docker.pkg.dev/<PROJECT_ID>/<REPOSITORY>/<IMAGE>:<TAG>"
+
+    cpu    = "<CPU>"
+    memory = "<MEMORY>"
+
+    min_instances = <MIN_INSTANCES>
+    max_instances = <MAX_INSTANCES>
+
+    timeout = "<TIMEOUT>"
+
+    is_public       = <TRUE_OR_FALSE>
+    service_account = "<SERVICE_ACCOUNT_EMAIL>"
+
+    env_vars = {}
+
+    # Sin VPC access
+    vpc_access = null
+
+    cr_srv_labels = {
+      application = "<APPLICATION_NAME>"
+      component   = "<COMPONENT_NAME>"
+    }
+  }
+
 }
