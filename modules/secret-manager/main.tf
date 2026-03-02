@@ -14,7 +14,7 @@ resource "google_secret_manager_secret" "secrets" {
   for_each = {
     for s in var.secrets : s.secret_id => s
   }
-  
+
   secret_id = each.value.secret_id
   project   = var.project_id
 

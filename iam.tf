@@ -14,7 +14,7 @@ module "iam" {
   project_id = var.project_id
 
   # Project IAM for users 
-  user_project_roles  = var.user_project_roles
+  user_project_roles = var.user_project_roles
 
   # Project IAM for groups
   group_project_roles = var.group_project_roles

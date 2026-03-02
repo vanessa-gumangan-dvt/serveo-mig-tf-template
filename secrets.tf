@@ -15,7 +15,7 @@ module "secret_manager" {
   secrets = var.secrets
 
   # Labels to be applied (merge common labels with secret labels)
-  labels  = var.labels
+  labels = var.labels
 
   # Optional: IAM bindings ON secrets
   secret_iam_bindings = var.secret_iam_bindings

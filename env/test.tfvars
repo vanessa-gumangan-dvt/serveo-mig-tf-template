@@ -11,16 +11,16 @@ region         = "<REGION>"
 
 # Common resource labelling
 labels = {
-  projectname         = "<PROJECT_NAME>"
-  projectstatus       = "<PROJECT_STATUS>"
-  ownerid             = "<OWNER_ID>"
-  owneremail          = "<OWNER_EMAIL>"
-  organization        = "serveo"
-  businessunit        = "<BUSINESS_UNIT>"
-  costcenter          = "<COST_CENTER>"
-  environment         = "<ENV>"
-  criticality         = "<CRITICALITY>"
-  dataclassification  = "<DATA_CLASSIFICATION>"
+  projectname        = "<PROJECT_NAME>"
+  projectstatus      = "<PROJECT_STATUS>"
+  ownerid            = "<OWNER_ID>"
+  owneremail         = "<OWNER_EMAIL>"
+  organization       = "serveo"
+  businessunit       = "<BUSINESS_UNIT>"
+  costcenter         = "<COST_CENTER>"
+  environment        = "<ENV>"
+  criticality        = "<CRITICALITY>"
+  dataclassification = "<DATA_CLASSIFICATION>"
 }
 
 # =============================================================================
@@ -47,7 +47,7 @@ group_project_roles = {
     "roles/<ROLE_1>"
   ]
 
-  "<GROUP_EMAIL_2>"  = [
+  "<GROUP_EMAIL_2>" = [
     "roles/<ROLE_1>",
     "roles/<ROLE_2>"
   ]
@@ -59,8 +59,8 @@ group_project_roles = {
 
 service_accounts = {
   "<SERVICE_ACCOUNT_ID_1>" = {
-    display_name  = "<DISPLAY_NAME>"
-    description   = "<DESCRIPTION>"
+    display_name = "<DISPLAY_NAME>"
+    description  = "<DESCRIPTION>"
     project_roles = [
       "roles/<ROLE_1>",
       "roles/<ROLE_2>"
@@ -68,8 +68,8 @@ service_accounts = {
   }
 
   "<SERVICE_ACCOUNT_ID_2>" = {
-    display_name  = "<DISPLAY_NAME>"
-    description   = "<DESCRIPTION>"
+    display_name = "<DISPLAY_NAME>"
+    description  = "<DESCRIPTION>"
     project_roles = [
       "roles/<ROLE_1>",
       "roles/<ROLE_2>"
@@ -175,7 +175,7 @@ buckets = {
     lifecycle_rules = [
       {
         action = {
-          type = "SetStorageClass"
+          type          = "SetStorageClass"
           storage_class = "NEARLINE"
         }
         condition = {
@@ -186,5 +186,27 @@ buckets = {
   }
 }
 
+# =============================================================================
+# ARTIFACT REGISTRY
+# =============================================================================
+artifact_registry_repositories = {
+  "<REPOSITORY_KEY_1>" = {
+    repository_id = "<REPOSITORY_ID_1>"
+    description   = "<DESCRIPTION_1>"
+    format        = "<FORMAT_1>" # DOCKER | MAVEN | NPM | PYTHON | APT | YUM
 
+    ar_labels = {
+      description = "<DESCRIPTION>"
+    }
+  }
 
+  "<REPOSITORY_KEY_2>" = {
+    repository_id = "<REPOSITORY_ID_2>"
+    description   = "<DESCRIPTION_2>"
+    format        = "<FORMAT_2>"
+
+    ar_labels = {
+      description = "<DESCRIPTION>"
+    }
+  }
+}

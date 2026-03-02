@@ -86,7 +86,7 @@ variable "secret_iam_bindings" {
 
 
 # ==========================================
-# Cloud Storage Buckets
+# BUCKETS
 # ==========================================
 variable "buckets" {
   description = "Buckets to create. Key map is used as bucket name, attributes are optional but have proper default values"
@@ -111,7 +111,28 @@ variable "buckets" {
   }))
 }
 
+# ==========================================
+# ARTIFACT REGISTRY
+# ==========================================
+variable "artifact_registry_repositories" {
+  description = <<EOT
+Artifact Registry repositories to create.
 
+Example:
+repositories = {
+  "backend" = {
+    repository_id = "backend-docker"
+    description   = "Backend Docker images"
+    format        = "DOCKER"
+    labels        = { environment = "dev" }
+  }
+}
+EOT
 
-
-
+  type = map(object({
+    repository_id = string
+    description   = string
+    format        = string
+    ar_labels     = map(string)
+  }))
+}
