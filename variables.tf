@@ -165,3 +165,23 @@ variable "cloud_run_services" {
     cr_srv_labels = map(string)
   }))
 }
+
+# ==========================================
+# COMPUTE ENGINE INSTANCES
+# ==========================================
+variable "vm_instances" {
+  description = "Compute Engine instances to create"
+  type = map(object({
+    name                = string
+    zone                = string
+    machine_type        = string
+    image               = string
+    disk_size_gb        = number
+    disk_type           = string
+    network             = string
+    subnetwork          = string
+    assign_public_ip    = bool
+    service_account     = string
+    vm_labels           = map(string) 
+  }))
+}

@@ -283,3 +283,51 @@ cloud_run_services = {
   }
 
 }
+
+# =============================================================================
+# COMPUTE ENGINE INSTANCES
+# =============================================================================
+vm_instances = {
+
+  "<VM_KEY_1>" = {
+    name         = "<VM_NAME_1>"
+    zone         = "<ZONE>"
+    machine_type = "<MACHINE_TYPE>"
+
+    image        = "<IMAGE_FAMILY_OR_SELF_LINK>"
+    disk_size_gb = "<DISK_SIZE_GB>"
+    disk_type    = "<DISK_TYPE>"
+
+    network    = "<VPC_NETWORK>"
+    subnetwork = "<SUBNETWORK>"
+
+    assign_public_ip = false
+
+    service_account = "<SERVICE_ACCOUNT_EMAIL>"
+
+    vm_labels = {
+      description = "<DESCRIPTION>"
+    }
+  }
+  "<VM_KEY_2>" = {
+    name         = "<VM_NAME_2>"
+    zone         = "<ZONE>"
+    machine_type = "<MACHINE_TYPE>"
+
+    image        = "<IMAGE_FAMILY_OR_SELF_LINK>"
+    disk_size_gb = "<DISK_SIZE_GB>"
+    disk_type    = "<DISK_TYPE>"
+
+    network    = "<VPC_NETWORK>"
+    subnetwork = "<SUBNETWORK>"
+
+    assign_public_ip = true
+
+    service_account = "<SERVICE_ACCOUNT_EMAIL>"
+
+    vm_labels = {
+      description = "<DESCRIPTION>"
+    }
+  }
+
+}
