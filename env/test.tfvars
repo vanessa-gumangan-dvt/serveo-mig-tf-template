@@ -9,6 +9,20 @@ project_id     = "<PROJECT_ID>"
 project_number = "<PROJECT_NUMBER>"
 region         = "<REGION>"
 
+# Common resource labelling
+labels = {
+  projectname         = "<PROJECT_NAME>"
+  projectstatus       = "<PROJECT_STATUS>"
+  ownerid             = "<OWNER_ID>"
+  owneremail          = "<OWNER_EMAIL>"
+  organization        = "serveo"
+  businessunit        = "<BUSINESS_UNIT>"
+  costcenter          = "<COST_CENTER>"
+  environment         = "<ENV>"
+  criticality         = "<CRITICALITY>"
+  dataclassification  = "<DATA_CLASSIFICATION>"
+}
+
 # =============================================================================
 # IAM - USER (grant roles)
 # =============================================================================
@@ -90,21 +104,24 @@ service_account_iam_bindings = {
   }
 }
 
-
-
 # =============================================================================
 # SECRET MANAGER 
 # =============================================================================
 
 secrets = [
-  "<SECRET_ID_1>",
-  "<SECRET_ID_2>"
+  {
+    secret_id = "<SECRET_ID_1>"
+    secret_labels = {
+      description = "<SECRET_DESCRIPTION_1>"
+    }
+  },
+  {
+    secret_id = "<SECRET_ID_2>"
+    secret_labels = {
+      description = "<SECRET_DESCRIPTION_2>"
+    }
+  }
 ]
-
-secret_labels = {
-  description       = "<DESCRIPTION>"
-  dataclassification = "<DATA_CLASSIFICATION>"
-}
 
 secret_iam_bindings = {
   "<SECRET_ID_1>" = {
@@ -127,49 +144,47 @@ secret_iam_bindings = {
   }
 }
 
+# =============================================================================
+# BUCKETS
+# =============================================================================
+buckets = {
+  "<BUCKET_NAME_1>" = {
+    # Minimal configuration (uses module defaults)
+    bucket_labels = {
+      description = "<DESCRIPTION>"
+    }
+  },
+  "<BUCKET_NAME_2>" = {
+    bucket_labels = {
+      description = "<DESCRIPTION>"
+    }
+
+    # Optional
+    iam_members = [
+      {
+        role   = "roles/storage.objectViewer"
+        member = "group:data@company.com"
+      },
+      {
+        role   = "roles/storage.objectAdmin"
+        member = "serviceAccount:sa-ci@project.iam.gserviceaccount.com"
+      }
+    ]
+
+    # Optional – override default lifecycle
+    lifecycle_rules = [
+      {
+        action = {
+          type = "SetStorageClass"
+          storage_class = "NEARLINE"
+        }
+        condition = {
+          age = 30
+        }
+      }
+    ]
+  }
+}
 
 
 
-
-# # =============================================================================
-# # TAGGING CONFIGURATION
-# # =============================================================================
-# labels = {
-#   projectname   = "plataformadeldato"
-#   projectstatus = "en_proyecto"
-#   ownerid       = "f1079"
-#   owneremail    = "ogimenez_at_serveo_dot_com"
-#   organization  = "serveo"
-#   businessunit  = "sistemas"
-#   costcenter    = "sn640is10"
-#   criticality   = "high"
-#   environment   = "test"
-# }
-
-
-# # =============================================================================
-# # CLOUD STORAGE BUCKETS
-# # =============================================================================
-# buckets = {
-#   # "bucket-example-with-non-default-attrs" = {
-#   #   "storage_class" = "NEARLINE"
-#   #   "iam_members" = [
-#   #     {
-#   #       "role" = "roles/storage.objectAdmin"
-#   #       "member" = "user:example-member@serveo.com"
-#   #     }
-#   #   ]
-#   # }
-#   "exports" = {
-#     labels = {
-#       dataclassification = "public"
-#       description        = "bucket-exports"
-#     }
-#   },
-#   "cf-code" = {
-#     labels = {
-#       dataclassification = "public"
-#       description        = "bucket-cf-code"
-#     }
-#   }
-# }

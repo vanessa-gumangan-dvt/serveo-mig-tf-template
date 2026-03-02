@@ -8,21 +8,19 @@ variable "region" {
   description = "Region used for user-managed secret replication (e.g., 'europe-west1')."
 }
 
-variable "secrets" {
-  description = <<EOT
-List of Secret Manager secret IDs to create (containers only).
-Secret values/versions are expected to be uploaded manually.
-
-Example:
-secrets = ["my-secret-1", "my-secret-2"]
-EOT
-  type = list(string)
-}
-
 variable "labels" {
-  description = "Base labels applied to all secrets. These will be merged with module defaults."
+  description = "A map of labels."
   type        = map(string)
   default     = {}
+}
+
+variable "secrets" {
+  description = "List of Secret Manager secret containers to create with labels."
+
+  type = list(object({
+    secret_id     = string
+    secret_labels = optional(map(string), {})
+  }))
 }
 
 variable "secret_iam_bindings" {

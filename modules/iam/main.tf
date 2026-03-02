@@ -14,9 +14,9 @@
 # - Expects user/group identifiers as emails (without the "user:" / "group:" prefix).
 # - Expects service account keys to match the service account account_id.
 
-# --------------------------------------------
+# =============================================
 # Service Accounts (creation)
-# --------------------------------------------
+# =============================================
 resource "google_service_account" "service_accounts" {
   for_each = var.service_accounts
 
@@ -26,9 +26,9 @@ resource "google_service_account" "service_accounts" {
   description  = try(each.value.description, null)
 }
 
-# --------------------------------------------
+# =============================================
 # Project-level IAM roles for Users
-# --------------------------------------------
+# =============================================
 locals {
   # Flatten users x roles into a stable map for for_each
   user_project_role_pairs = merge([
@@ -50,9 +50,9 @@ resource "google_project_iam_member" "user_project_roles" {
   member  = each.value.member
 }
 
-# --------------------------------------------
+# =============================================
 # Project-level IAM roles for Groups
-# --------------------------------------------
+# =============================================
 locals {
   # Flatten groups x roles into a stable map for for_each
   group_project_role_pairs = merge([
@@ -74,10 +74,10 @@ resource "google_project_iam_member" "group_project_roles" {
   member  = each.value.member
 }
 
-# --------------------------------------------
+# =============================================
 # Project-level IAM roles for Service Accounts
 # (What each SA can do in the project)
-# --------------------------------------------
+# =============================================
 locals {
   # Flatten service_accounts x project_roles into a stable map for for_each
   sa_project_role_pairs = merge([
@@ -99,10 +99,10 @@ resource "google_project_iam_member" "sa_project_roles" {
   member  = "serviceAccount:${google_service_account.service_accounts[each.value.sa_key].email}"
 }
 
-# --------------------------------------------
+# =============================================
 # IAM bindings ON Service Accounts (optional)
 # (Who can impersonate / actAs / federate into the SA)
-# --------------------------------------------
+# =============================================
 locals {
   # Flatten:
   # service_account_iam_bindings = {

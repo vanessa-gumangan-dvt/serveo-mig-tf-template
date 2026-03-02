@@ -11,9 +11,11 @@
 # Secrets (containers only)
 # --------------------------------------------
 resource "google_secret_manager_secret" "secrets" {
-  for_each = toset(var.secrets)
-
-  secret_id = each.value
+  for_each = {
+    for s in var.secrets : s.secret_id => s
+  }
+  
+  secret_id = each.value.secret_id
   project   = var.project_id
 
   replication {
@@ -24,9 +26,7 @@ resource "google_secret_manager_secret" "secrets" {
     }
   }
 
-  labels = merge(
-    var.labels,
-  )
+  labels = merge(each.value.secret_labels, var.labels)
 }
 
 # --------------------------------------------

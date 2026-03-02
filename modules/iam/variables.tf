@@ -1,16 +1,12 @@
-# ============================================
-# Inputs
-# ============================================
-
 variable "project_id" {
   type        = string
   description = "GCP project ID where IAM will be managed."
 }
 
-# --------------------------------------------
+# =============================================
 # Users: project-level roles
 # Key = user email (without 'user:' prefix)
-# --------------------------------------------
+# =============================================
 variable "user_project_roles" {
   description = <<EOT
 Project-level IAM roles for users.
@@ -28,10 +24,10 @@ EOT
   default = {}
 }
 
-# --------------------------------------------
+# =============================================
 # Groups: project-level roles
 # Key = group email (without 'group:' prefix)
-# --------------------------------------------
+# =============================================
 variable "group_project_roles" {
   description = <<EOT
 Project-level IAM roles for groups.
@@ -49,10 +45,10 @@ EOT
   default = {}
 }
 
-# --------------------------------------------
+# =============================================
 # Service Accounts: create + project roles
 # Key = service account account_id
-# --------------------------------------------
+# =============================================
 variable "service_accounts" {
   description = <<EOT
 Service Accounts to create and their project-level roles.
@@ -78,10 +74,10 @@ EOT
   default = {}
 }
 
-# --------------------------------------------
+# ==================================================
 # Service Account IAM bindings (optional)
 # Who can act on / impersonate each service account
-# --------------------------------------------
+# ==================================================
 variable "service_account_iam_bindings" {
   description = <<EOT
 Optional IAM bindings ON each Service Account (impersonation / actAs / WIF).

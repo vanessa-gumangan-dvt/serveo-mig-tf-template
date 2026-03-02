@@ -1,5 +1,5 @@
 # ============================================
-# IAM MODULE
+# MODULE - IAM
 # ============================================
 # This file invokes the global IAM module to manage:
 # - Project-level IAM roles for users and groups

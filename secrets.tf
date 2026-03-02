@@ -11,7 +11,10 @@ module "secret_manager" {
   project_id = var.project_id
   region     = var.region
 
+  # Secrets to create (containers only)
   secrets = var.secrets
+
+  # Labels to be applied (merge common labels with secret labels)
   labels  = var.labels
 
   # Optional: IAM bindings ON secrets
